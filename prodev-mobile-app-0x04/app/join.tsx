@@ -1,212 +1,73 @@
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import {
-  StyleSheet,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+// app/join.tsx
+import { useRouter } from "expo-router";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { FACEBOOKLOGO, GOOGLELOGO } from "../constants";
+import { styles } from "../styles/_joinstyle";
 
 export default function Join() {
+  const router = useRouter();
+
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.navGroup}>
-          <Ionicons
-            name='arrow-back'
-            size={25}
-          />
-          <Image source={require("@/assets/images/Logo.png")} />
-        </View>
-        <Text style={styles.largeText}>Sign in to your</Text>
-        <Text style={styles.largeText}>Account</Text>
-        <Text style={styles.smallText}>
-          Enter your email and password to sign in.
+    <View style={styles.container}>
+      <View style={styles.iconsection}>
+        <Text></Text>
+        <Text
+          style={{ fontSize: 16 }}
+          onPress={() => router.push("/")}>
+          Close
         </Text>
+      </View>
 
-        <View style={styles.formGroup}>
-          <View>
-            <Text style={styles.placeholderText}>Email</Text>
-            <TextInput
-              keyboardType='email-address'
-              style={styles.inputField}
-            />
-          </View>
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.placeholderText}>Password</Text>
-            <View style={styles.passwordGroup}>
-              <TextInput style={{ flex: 1 }} />
-              <FontAwesome
-                name='eye-slash'
-                size={24}
-                color='#7E7B7B'
-              />
-            </View>
-          </View>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+      <View style={styles.titleTextGroup}>
+        <Text style={styles.titleText}>Join Now</Text>
+        <Text style={styles.subText}>Create your account to get started</Text>
+      </View>
+
+      <View style={styles.formGroup}>
+        <View>
+          <Text style={styles.formLabel}>Email</Text>
+          <TextInput style={styles.formControl} />
         </View>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Sign in</Text>
+        <View>
+          <Text style={styles.formLabel}>Password</Text>
+          <TextInput
+            secureTextEntry={true}
+            style={styles.formControl}
+          />
+        </View>
+      </View>
+
+      <TouchableOpacity style={styles.primaryButton}>
+        <Text style={styles.buttonText}>Create Account</Text>
+      </TouchableOpacity>
+
+      <View style={styles.dividerGroup}>
+        <View style={styles.divider}></View>
+        <Text style={styles.dividerText}>or continue with</Text>
+        <View style={styles.divider}></View>
+      </View>
+
+      <View style={styles.secondaryButtonGroup}>
+        <TouchableOpacity style={styles.secondaryButton}>
+          <Image source={GOOGLELOGO} />
+          <Text style={styles.secondaryButtonText}>Google</Text>
         </TouchableOpacity>
 
-        <View style={styles.dividerGroup}>
-          <View style={styles.divider}></View>
-          <Text style={styles.dividerText}>OR</Text>
-          <View style={styles.divider}></View>
-        </View>
+        <TouchableOpacity style={styles.secondaryButton}>
+          <Image source={FACEBOOKLOGO} />
+          <Text style={styles.secondaryButtonText}>Facebook</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.socialMediaButtonGroup}>
-          <TouchableOpacity style={styles.socialMediaButton}>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-              }}>
-              <Image source={require("@/assets/images/google.png")} />
-              <Text style={styles.socialMediaButtonText}>
-                Continue with Google
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.socialMediaButton}>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-              }}>
-              <Image source={require("@/assets/images/facebook.png")} />
-              <Text style={styles.socialMediaButtonText}>
-                Continue with Facebook
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.subTextGroup}>
-          <Text style={styles.subText}>Don&apos;t have an account?</Text>
-          <Text style={styles.subTextJoin}>Join now</Text>
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      <View style={styles.signupgroup}>
+        <Text style={styles.signupTitleText}>Already have an account? </Text>
+        <Text
+          style={styles.signupSubTitleText}
+          onPress={() => router.push("/signin")}>
+          Sign In
+        </Text>
+      </View>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    backgroundColor: "#fff",
-  },
-  navGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    marginBottom: 20,
-  },
-  largeText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  smallText: {
-    fontSize: 16,
-    color: "#7E7B7B",
-    marginTop: 10,
-    marginBottom: 30,
-  },
-  formGroup: {
-    marginBottom: 30,
-  },
-  placeholderText: {
-    fontSize: 16,
-    color: "#7E7B7B",
-    marginBottom: 5,
-  },
-  inputField: {
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    fontSize: 16,
-  },
-  passwordGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-  },
-  forgotPasswordText: {
-    textAlign: "right",
-    color: "#007BFF",
-    marginTop: 10,
-    fontSize: 14,
-  },
-  button: {
-    backgroundColor: "#007BFF",
-    borderRadius: 10,
-    paddingVertical: 15,
-    alignItems: "center",
-    marginBottom: 30,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  dividerGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 30,
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#E0E0E0",
-  },
-  dividerText: {
-    marginHorizontal: 10,
-    color: "#7E7B7B",
-    fontSize: 16,
-  },
-  socialMediaButtonGroup: {
-    gap: 15,
-    marginBottom: 30,
-  },
-  socialMediaButton: {
-    borderWidth: 1,
-    borderColor: "#E0E0E0",
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: "center",
-  },
-  socialMediaButtonText: {
-    fontSize: 16,
-    color: "#333",
-  },
-  subTextGroup: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 5,
-  },
-  subText: {
-    color: "#7E7B7B",
-    fontSize: 16,
-  },
-  subTextJoin: {
-    color: "#007BFF",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
