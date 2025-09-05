@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🎨 Custom variables & reusable styles */
+:root {
+  --color-primary: #0601b4;
+  --color-secondary: #34967c;
+}
+
+.text-primary {
+  @apply text-[var(--color-primary)];
+}
+
+.bg-primary {
+  @apply bg-[var(--color-primary)];
+}
+
+.bg-secondary {
+  @apply bg-[var(--color-secondary)];
+}
